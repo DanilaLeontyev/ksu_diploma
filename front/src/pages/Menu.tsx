@@ -1,9 +1,9 @@
-import { Button } from "antd";
+import ProductCardList from "../components/ProductCardList";
 
 function Menu() {
   return (
     <>
-      <Button>Menu</Button>
+      <ProductCardList />
     </>
   );
 }
