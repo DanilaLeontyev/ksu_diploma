@@ -1,17 +1,18 @@
-import { Layout as AntLayout, Button } from "antd";
+import { Layout as AntLayout, Button, Image } from "antd";
 import { useSelector } from "react-redux";
 import { Link, Outlet } from "react-router";
 import { RootState } from "../store/store";
+import logo from "../assets/logo.png";
 
 const { Header, Content, Footer } = AntLayout;
 
 const headerStyle: React.CSSProperties = {
   textAlign: "center",
-  height: 48,
-  minHeight: "6vh",
-  paddingInline: 24,
-  lineHeight: "48px",
+  minHeight: "12vh",
   backgroundColor: "#F8E7F6",
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
 };
 
 const contentStyle: React.CSSProperties = {
@@ -35,6 +36,7 @@ function Layout() {
   return (
     <AntLayout>
       <Header style={headerStyle}>
+        <Image src={logo} width={150} />
         <Button type="primary">
           <Link to="/cart">
             Заказ /{" "}
