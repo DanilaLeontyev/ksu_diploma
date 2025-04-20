@@ -2,16 +2,24 @@ import React from "react";
 import { Card, Button } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { Product } from "../types";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 
 interface ProductCardProps {
   product: Product;
-  onAddToCart: () => void;
+  onAddToCart: (product: Product) => void;
+  onDeleteFromCart: (product: Product) => void;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
-  product: { name, description, price, image },
+  product,
   onAddToCart,
+  onDeleteFromCart,
 }) => {
+  const { name, description, price, image, id } = product;
+
+  const cart = useSelector((state: RootState) => state.cart.cart);
+  const count = cart.filter((item) => item.id === id).length;
   return (
     <Card
       hoverable
@@ -46,13 +54,22 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <span style={{ fontWeight: "bold", fontSize: "16px" }}>
           {price.toFixed(2)} ₽
         </span>
-        <Button
-          type="primary"
-          icon={<ShoppingCartOutlined />}
-          onClick={onAddToCart}
-        >
-          Добавить
-        </Button>
+        {count > 0 && (
+          <>
+            <Button onClick={() => onDeleteFromCart(product)}>-</Button>
+            <span style={{ fontSize: "18px" }}>{count}</span>
+            <Button onClick={() => onAddToCart(product)}>+</Button>
+          </>
+        )}
+        {count === 0 && (
+          <Button
+            type="primary"
+            icon={<ShoppingCartOutlined />}
+            onClick={() => onAddToCart(product)}
+          >
+            Добавить
+          </Button>
+        )}
       </div>
     </Card>
   );

@@ -1,9 +1,14 @@
 import React from "react";
 import ProductCard from "./ProductCard";
 import { products } from "../products";
+import { useDispatch } from "react-redux";
+import { addToCart, deleteFromCart } from "../store/cartSlice";
 
 const ProductCardList: React.FC = () => {
   const productsData = products;
+
+  const dispatch = useDispatch();
+
   return (
     <div
       style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
@@ -12,7 +17,8 @@ const ProductCardList: React.FC = () => {
         <ProductCard
           key={product.id}
           product={product}
-          onAddToCart={() => console.log("add to cart")}
+          onAddToCart={(product) => dispatch(addToCart(product))}
+          onDeleteFromCart={(product) => dispatch(deleteFromCart(product))}
         />
       ))}
     </div>
