@@ -36,11 +36,16 @@ function Layout() {
   return (
     <AntLayout>
       <Header style={headerStyle}>
-        <Image src={logo} width={150} />
+        <Link to="/">
+          <Image src={logo} width={150} preview={false} />
+        </Link>
         <Button type="primary">
           <Link to="/cart">
             Заказ /{" "}
-            {cart.reduce((prev, cur) => (prev += cur.price), 0).toFixed(2)} ₽
+            {cart
+              .reduce((prev, cur) => (prev += cur.price * cur.quantity), 0)
+              .toFixed(2)}{" "}
+            ₽
           </Link>
         </Button>
       </Header>

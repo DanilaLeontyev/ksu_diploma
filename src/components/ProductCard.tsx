@@ -19,7 +19,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
   const { name, description, price, image, id } = product;
 
   const cart = useSelector((state: RootState) => state.cart.cart);
-  const count = cart.filter((item) => item.id === id).length;
+  const currentItem = cart.filter((item) => item.id === id)[0];
+
   return (
     <Card
       hoverable
@@ -54,14 +55,14 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <span style={{ fontWeight: "bold", fontSize: "16px" }}>
           {price.toFixed(2)} ₽
         </span>
-        {count > 0 && (
+        {currentItem?.quantity > 0 && (
           <>
             <Button onClick={() => onDeleteFromCart(product)}>-</Button>
-            <span style={{ fontSize: "18px" }}>{count}</span>
+            <span style={{ fontSize: "18px" }}>{currentItem.quantity}</span>
             <Button onClick={() => onAddToCart(product)}>+</Button>
           </>
         )}
-        {count === 0 && (
+        {!currentItem && (
           <Button
             type="primary"
             icon={<ShoppingCartOutlined />}

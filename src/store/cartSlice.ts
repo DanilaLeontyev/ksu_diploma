@@ -15,21 +15,32 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     deleteFromCart: (state, action: PayloadAction<Product>) => {
-      // delete item from cart by id
       const index = state.cart.findIndex(
         (item) => item.id === action.payload.id
       );
-      if (index !== -1) {
+
+      if (index === -1) return;
+
+      if (state.cart[index].quantity > 1) {
+        state.cart[index].quantity -= 1;
+      } else {
         state.cart.splice(index, 1);
       }
     },
     addToCart: (state, action: PayloadAction<Product>) => {
-      state.cart.push(action.payload);
+      const index = state.cart.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      if (index !== -1) {
+        state.cart[index].quantity += 1;
+        return;
+      }
+
+      state.cart.push({ ...action.payload, quantity: 1 });
     },
   },
 });
 
-// Action creators are generated for each case reducer function
 export const { deleteFromCart, addToCart } = cartSlice.actions;
 
 export default cartSlice.reducer;
