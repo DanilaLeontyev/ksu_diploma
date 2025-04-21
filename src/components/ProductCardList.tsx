@@ -1,28 +1,35 @@
 import React from "react";
 import ProductCard from "./ProductCard";
-import { products } from "../products";
 import { useDispatch } from "react-redux";
 import { addToCart, deleteFromCart } from "../store/cartSlice";
+import { useGetAllProductsQuery } from "../store/api/productApi";
+import { Spin } from "antd";
 
 const ProductCardList: React.FC = () => {
-  const productsData = products;
-
+  const { data, error, isLoading } = useGetAllProductsQuery(undefined);
   const dispatch = useDispatch();
-
-  return (
-    <div
-      style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
-    >
-      {productsData.map((product) => (
-        <ProductCard
-          key={product.id}
-          product={product}
-          onAddToCart={(product) => dispatch(addToCart(product))}
-          onDeleteFromCart={(product) => dispatch(deleteFromCart(product))}
-        />
-      ))}
-    </div>
-  );
+  if (isLoading) {
+    return <Spin size="large" />;
+  }
+  if (error) {
+    return <div>Error loading products</div>;
+  }
+  if (data) {
+    return (
+      <div
+        style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
+      >
+        {data.map((product) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+            onAddToCart={(product) => dispatch(addToCart(product))}
+            onDeleteFromCart={(product) => dispatch(deleteFromCart(product))}
+          />
+        ))}
+      </div>
+    );
+  }
 };
 
 export default ProductCardList;
