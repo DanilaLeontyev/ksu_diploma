@@ -4,7 +4,7 @@ import { Order, OrderBackend, Product } from "../../types";
 // Define a service using a base URL and expected endpoints
 export const productApi = createApi({
   reducerPath: "productApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8080/" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "http://94.26.239.216:44483/" }),
   endpoints: (build) => ({
     getAllProducts: build.query<Product[], undefined>({
       query: () => `products`,
