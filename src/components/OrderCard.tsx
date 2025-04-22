@@ -44,7 +44,7 @@ function OrderCard(props: OrderCardProps) {
           {price.toFixed(2)} ₽
         </span>
 
-        <Checkbox value={paid} />
+        <Checkbox checked={paid} />
       </div>
     </Card>
   );

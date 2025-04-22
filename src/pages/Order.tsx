@@ -2,6 +2,7 @@ import { useParams } from "react-router";
 import { useGetOrderQuery } from "../store/api/productApi";
 import { Spin } from "antd";
 import OrderCard from "../components/OrderCard";
+import QRCode from "react-qr-code";
 
 function Order() {
   const { cartId } = useParams();
@@ -14,11 +15,11 @@ function Order() {
   if (error) {
     return <div>Ошибка загрузки</div>;
   }
-
-  console.log(data);
+  console.log("cartId", cartId);
+  console.log("qr url", `${window.location.origin}/order/${cartId}`);
   return (
     <div>
-      orders: ${cartId}
+      <QRCode value={`${window.location.origin}/order/${cartId}`} />
       <div
         style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
       >

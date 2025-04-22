@@ -18,16 +18,9 @@ const headerStyle: React.CSSProperties = {
 const contentStyle: React.CSSProperties = {
   textAlign: "center",
   height: 100,
-  minHeight: "80vh",
+  minHeight: "82vh",
   lineHeight: "120px",
   backgroundColor: "#F5F5F5",
-};
-
-const footerStyle: React.CSSProperties = {
-  textAlign: "center",
-  height: 64,
-  minHeight: "10vh",
-  backgroundColor: "#F8E7F6",
 };
 
 function Layout() {
@@ -52,7 +45,6 @@ function Layout() {
       <Content style={contentStyle}>
         <Outlet />
       </Content>
-      <Footer style={footerStyle}>Footer</Footer>
     </AntLayout>
   );
 }
