@@ -4,7 +4,7 @@ import { Link, Outlet } from "react-router";
 import { RootState } from "../store/store";
 import logo from "../assets/logo.png";
 
-const { Header, Content, Footer } = AntLayout;
+const { Header, Content } = AntLayout;
 
 const headerStyle: React.CSSProperties = {
   textAlign: "center",
