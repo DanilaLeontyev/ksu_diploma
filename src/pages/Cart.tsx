@@ -2,15 +2,19 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store/store";
 import { Table, Button, Space, Typography } from "antd";
 import { PlusOutlined, MinusOutlined } from "@ant-design/icons";
-import { addToCart, deleteFromCart } from "../store/cartSlice";
+import { addToCart, deleteFromCart, setCartId } from "../store/cartSlice";
 import { Product } from "../types";
 import { ColumnsType } from "antd/es/table";
+import { useCreateOrderMutation } from "../store/api/productApi";
+import { useNavigate } from "react-router";
 
 const { Title } = Typography;
 
 function Cart() {
   const cart = useSelector((state: RootState) => state.cart.cart);
+  const [createOrder] = useCreateOrderMutation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const columns: ColumnsType<Product> = [
     {
@@ -55,8 +59,31 @@ function Cart() {
   ];
 
   const handleCreateOrder = () => {
-    console.log("Order created:", cart);
-    // Add your order creation logic here
+    const ids: string[] = cart
+      .map((product) => {
+        const copyIds = [];
+        if (product.quantity > 0) {
+          for (let i = 0; i < product.quantity; i++) {
+            copyIds.push(product.id);
+          }
+        }
+        return copyIds;
+      })
+      .flat();
+
+    createOrder({
+      productIds: ids,
+    })
+      .then((res) => {
+        if (res.data?.responseObject) {
+          dispatch(setCartId(res.data.responseObject));
+          navigate(`/order/${res.data.responseObject}`);
+        }
+      })
+      .catch((error) => {
+        console.error("Ошибка при создании заказа:", error);
+        alert("Ошибка при создании заказа. Пожалуйста, попробуйте еще раз.");
+      });
   };
 
   return (

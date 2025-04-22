@@ -6,3 +6,14 @@ export interface Product {
   image: string;
   quantity: number;
 }
+
+export interface Order {
+  id: string;
+  paid: boolean;
+  product: Product;
+}
+export interface OrderBackend {
+  id: string;
+  paid: string;
+  product: Product;
+}

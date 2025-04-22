@@ -4,10 +4,12 @@ import { Product } from "../types";
 
 export interface CartState {
   cart: Product[];
+  cartId: string;
 }
 
 const initialState: CartState = {
   cart: [],
+  cartId: "",
 };
 
 export const cartSlice = createSlice({
@@ -38,9 +40,12 @@ export const cartSlice = createSlice({
 
       state.cart.push({ ...action.payload, quantity: 1 });
     },
+    setCartId: (state, action: PayloadAction<string>) => {
+      state.cartId = action.payload;
+    },
   },
 });
 
-export const { deleteFromCart, addToCart } = cartSlice.actions;
+export const { deleteFromCart, addToCart, setCartId } = cartSlice.actions;
 
 export default cartSlice.reducer;
