@@ -5,17 +5,28 @@ import { Product } from "../types";
 export interface CartState {
   cart: Product[];
   cartId: string;
+  productUIDs: string[];
 }
 
 const initialState: CartState = {
   cart: [],
   cartId: "",
+  productUIDs: [],
 };
 
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    checkedForPaymentsIds: (state, action: PayloadAction<string>) => {
+      if (state.productUIDs.includes(action.payload)) {
+        state.productUIDs = state.productUIDs.filter(
+          (v) => v !== action.payload
+        );
+      } else {
+        state.productUIDs.push(action.payload);
+      }
+    },
     deleteFromCart: (state, action: PayloadAction<Product>) => {
       const index = state.cart.findIndex(
         (item) => item.id === action.payload.id
@@ -46,6 +57,7 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { deleteFromCart, addToCart, setCartId } = cartSlice.actions;
+export const { deleteFromCart, addToCart, setCartId, checkedForPaymentsIds } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;

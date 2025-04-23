@@ -1,5 +1,8 @@
 import { Card, Checkbox } from "antd";
 import { Order } from "../types";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store/store";
+import { checkedForPaymentsIds } from "../store/cartSlice";
 
 interface OrderCardProps {
   order: Order;
@@ -7,8 +10,12 @@ interface OrderCardProps {
 
 function OrderCard(props: OrderCardProps) {
   const { order } = props;
-  const { product, paid } = order;
+  const { product, paid, productUID } = order;
   const { name, price, image } = product;
+  const dispatch = useDispatch();
+  const productUIDs = useSelector((state: RootState) => state.cart.productUIDs);
+
+  const isChecked = productUIDs.includes(productUID) ?? paid;
   return (
     <Card
       hoverable
@@ -44,7 +51,12 @@ function OrderCard(props: OrderCardProps) {
           {price.toFixed(2)} ₽
         </span>
 
-        <Checkbox checked={paid} />
+        <Checkbox
+          checked={isChecked}
+          onChange={() => {
+            dispatch(checkedForPaymentsIds(productUID));
+          }}
+        />
       </div>
     </Card>
   );

@@ -11,9 +11,11 @@ export interface Order {
   id: string;
   paid: boolean;
   product: Product;
+  productUID: string;
 }
 export interface OrderBackend {
   id: string;
   paid: string;
   product: Product;
+  productUID: string;
 }
