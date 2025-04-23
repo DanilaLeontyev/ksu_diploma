@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import { useGetOrderQuery } from "../store/api/productApi";
+import { useGetOrderQuery, usePayOrderMutation } from "../store/api/productApi";
 import { Button, Spin } from "antd";
 import OrderCard from "../components/OrderCard";
 import QRCode from "react-qr-code";
@@ -8,8 +8,18 @@ import { useSelector } from "react-redux";
 
 function Order() {
   const { cartId } = useParams();
-  const { data, error, isLoading } = useGetOrderQuery({ cartId: cartId || "" });
+  const { data, error, isLoading, refetch } = useGetOrderQuery({
+    cartId: cartId || "",
+  });
   const productUIDs = useSelector((state: RootState) => state.cart.productUIDs);
+  const [payOrder] = usePayOrderMutation();
+
+  const onPayment = async () => {
+    if (cartId) {
+      await payOrder({ productUIDs, cartId });
+      await refetch();
+    }
+  };
 
   const selectedProductSum = (): number => {
     if (data) {
@@ -24,6 +34,7 @@ function Order() {
     }
     return 0;
   };
+
   if (isLoading) {
     return <Spin size="large" />;
   }
@@ -35,7 +46,7 @@ function Order() {
   return (
     <div>
       <QRCode value={`${window.location.origin}/order/${cartId}`} />
-      <Button type="primary">
+      <Button type="primary" onClick={() => onPayment()}>
         Оплатить / {selectedProductSum().toFixed(2)}
       </Button>
       <div

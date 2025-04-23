@@ -15,7 +15,7 @@ function OrderCard(props: OrderCardProps) {
   const dispatch = useDispatch();
   const productUIDs = useSelector((state: RootState) => state.cart.productUIDs);
 
-  const isChecked = productUIDs.includes(productUID) ?? paid;
+  const isChecked = productUIDs.includes(productUID);
   return (
     <Card
       hoverable
@@ -29,6 +29,8 @@ function OrderCard(props: OrderCardProps) {
       style={{
         width: 200,
         margin: "16px",
+        opacity: paid ? "0.1" : "1.0",
+        cursor: paid ? "default" : "pointer",
       }}
     >
       <div
@@ -48,10 +50,11 @@ function OrderCard(props: OrderCardProps) {
         }}
       >
         <span style={{ fontWeight: "bold", fontSize: "16px" }}>
-          {price.toFixed(2)} ₽
+          {price.toFixed(2)} ₽<br />
         </span>
-
+        <span>{paid.toString()}</span>
         <Checkbox
+          disabled={paid}
           checked={isChecked}
           onChange={() => {
             dispatch(checkedForPaymentsIds(productUID));
