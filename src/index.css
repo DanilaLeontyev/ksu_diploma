@@ -2,6 +2,9 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #040402;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -9,10 +12,25 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-
 body {
-  margin: 0;
-  min-width: 100vw;
+  margin: 0 auto;
+  max-width: 90vw;
   min-height: 100vh;
+  position: relative;
 }
 
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url(./assets/bgi.jpg);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  background-attachment: fixed;
+  background-size: cover contain;
+  filter: blur(3px);
+  z-index: -1;
+}

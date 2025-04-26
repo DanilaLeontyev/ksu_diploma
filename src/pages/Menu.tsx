@@ -1,11 +1,7 @@
-import ProductCardList from "../components/ProductCardList";
+import ProductCardListNew from '../components/ProductCardListNew';
 
 function Menu() {
-  return (
-    <>
-      <ProductCardList />
-    </>
-  );
+  return <ProductCardListNew />;
 }
 
 export default Menu;

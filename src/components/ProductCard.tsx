@@ -1,9 +1,9 @@
-import React from "react";
-import { Card, Button } from "antd";
-import { ShoppingCartOutlined } from "@ant-design/icons";
-import { Product } from "../types";
-import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
+import React from 'react';
+import { Card, Button } from 'antd';
+import { ShoppingCartOutlined } from '@ant-design/icons';
+import { Product } from '../types';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/store';
 
 interface ProductCardProps {
   product: Product;
@@ -19,7 +19,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   const { name, description, price, image, id } = product;
 
   const cart = useSelector((state: RootState) => state.cart.cart);
-  const currentItem = cart.filter((item) => item.id === id)[0];
+  const currentItem = cart.filter(item => item.id === id)[0];
 
   return (
     <Card
@@ -28,37 +28,37 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <img
           alt={name}
           src={image}
-          style={{ height: 200, objectFit: "cover" }}
+          style={{ height: 200, objectFit: 'cover' }}
         />
       }
       style={{
         width: 300,
-        margin: "16px",
+        margin: '16px',
       }}
     >
       <div
         style={{
-          height: 150, // Fixed height for the card body
-          overflow: "hidden", // Ensures content doesn't overflow
+          height: 150,
+          overflow: 'hidden',
         }}
       >
         <Card.Meta title={name} description={description} />
       </div>
       <div
         style={{
-          marginTop: "16px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
+          marginTop: '16px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
         }}
       >
-        <span style={{ fontWeight: "bold", fontSize: "16px" }}>
+        <span style={{ fontWeight: 'bold', fontSize: '16px' }}>
           {price.toFixed(2)} ₽
         </span>
         {currentItem?.quantity > 0 && (
           <>
             <Button onClick={() => onDeleteFromCart(product)}>-</Button>
-            <span style={{ fontSize: "18px" }}>{currentItem.quantity}</span>
+            <span style={{ fontSize: '18px' }}>{currentItem.quantity}</span>
             <Button onClick={() => onAddToCart(product)}>+</Button>
           </>
         )}

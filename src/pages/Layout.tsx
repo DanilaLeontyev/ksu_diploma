@@ -9,7 +9,7 @@ const { Header, Content } = AntLayout;
 const headerStyle: React.CSSProperties = {
   textAlign: "center",
   minHeight: "12vh",
-  backgroundColor: "#F8E7F6",
+  backgroundColor: "transparent",
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
@@ -20,14 +20,14 @@ const contentStyle: React.CSSProperties = {
   height: 100,
   minHeight: "82vh",
   lineHeight: "120px",
-  backgroundColor: "#F5F5F5",
+  backgroundColor: "transparent"
 };
 
 function Layout() {
   const cart = useSelector((state: RootState) => state.cart.cart);
 
   return (
-    <AntLayout>
+    <AntLayout style={{backgroundColor: "transparent"}}>
       <Header style={headerStyle}>
         <Link to="/">
           <Image src={logo} width={150} preview={false} />

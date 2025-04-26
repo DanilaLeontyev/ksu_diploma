@@ -1,8 +1,8 @@
-import { Card, Checkbox } from "antd";
-import { Order } from "../types";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../store/store";
-import { checkedForPaymentsIds } from "../store/cartSlice";
+import { Card, Checkbox } from 'antd';
+import { Order } from '../types';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../store/store';
+import { checkedForPaymentsIds } from '../store/cartSlice';
 
 interface OrderCardProps {
   order: Order;
@@ -16,6 +16,7 @@ function OrderCard(props: OrderCardProps) {
   const productUIDs = useSelector((state: RootState) => state.cart.productUIDs);
 
   const isChecked = productUIDs.includes(productUID);
+
   return (
     <Card
       hoverable
@@ -23,33 +24,33 @@ function OrderCard(props: OrderCardProps) {
         <img
           alt={name}
           src={image}
-          style={{ height: 100, objectFit: "cover" }}
+          style={{ height: 100, objectFit: 'cover' }}
         />
       }
       style={{
         width: 200,
-        margin: "16px",
-        opacity: paid ? "0.1" : "1.0",
-        cursor: paid ? "default" : "pointer",
+        margin: '16px',
+        opacity: paid ? '0.1' : '1.0',
+        cursor: paid ? 'default' : 'pointer',
       }}
     >
       <div
         style={{
           height: 50, // Fixed height for the card body
-          overflow: "hidden", // Ensures content doesn't overflow
+          overflow: 'hidden', // Ensures content doesn't overflow
         }}
       >
         <Card.Meta title={name} />
       </div>
       <div
         style={{
-          marginTop: "16px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
+          marginTop: '16px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
         }}
       >
-        <span style={{ fontWeight: "bold", fontSize: "16px" }}>
+        <span style={{ fontWeight: 'bold', fontSize: '16px' }}>
           {price.toFixed(2)} ₽<br />
         </span>
         <span>{paid.toString()}</span>
