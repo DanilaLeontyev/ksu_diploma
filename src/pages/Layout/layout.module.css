@@ -2,33 +2,37 @@
 
 .layout {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .header {
-  text-align: center;
   min-height: 12vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-  text-decoration: none;
 }
 
 .content {
-  text-align: center;
-  min-height: 82vh;
+  flex: 1;
   background-color: transparent;
   padding: 20px;
 }
 
+.logoLink {
+  text-decoration: none;
+}
+
 .logo {
-  width: 150px;
-  height: auto;
   font-family: 'Iceberg', sans-serif;
-  font-weight: 400;
-  font-style: normal;
   font-size: 42px;
   color: #ffd700;
+  transition: opacity 0.3s ease;
+}
+
+.logo:hover {
+  opacity: 0.8;
 }
 
 .cartButton {
@@ -38,15 +42,12 @@
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
-  transition: opacity 0.3s;
+  color: #232323;
   text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
 }
 
 .cartButton:hover {
-  opacity: 0.8;
-}
-
-.cartLink {
-  color: #232323;
-  text-decoration: none;
+  background-color: #e6c200;
 }

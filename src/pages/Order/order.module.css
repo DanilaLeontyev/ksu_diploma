@@ -1,0 +1,23 @@
+.errorAlert {
+  margin: 24px;
+  max-width: 600px;
+}
+
+.order {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.orderLeft {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding-top: 16px;
+}
+
+.orderLeft :first-child {
+  align-self: center;
+}

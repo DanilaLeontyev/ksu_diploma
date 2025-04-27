@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Product } from '../../types';
 import { RootState } from '../../store/store';
-import styles from './productCard.module.css';
+import styles from './ProductCard.module.css';
 
 interface ProductCardProps {
   product: Product;
@@ -18,49 +18,54 @@ const ProductCard: React.FC<ProductCardProps> = ({
   const { name, description, price, image, id } = product;
   const cart = useSelector((state: RootState) => state.cart.cart);
   const currentItem = cart.find(item => item.id === id);
+  const count = currentItem?.quantity || 0;
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onAddToCart(product);
+  };
+
+  const handleRemoveFromCart = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onDeleteFromCart(product);
+  };
 
   return (
-    <div className={styles.card}>
+    <article className={styles.card}>
       <div className={styles.imageContainer}>
-        <img alt={name} src={image} className={styles.image} />
+        <img alt={name} src={image} className={styles.image} loading="lazy" />
       </div>
 
       <div className={styles.content}>
-        <div>
+        <div className={styles.info}>
           <h3 className={styles.title}>{name}</h3>
-          <p>{description}</p>
+          <p className={styles.description}>{description}</p>
         </div>
 
         <div className={styles.actions}>
           <span className={styles.price}>{price.toFixed(2)} ₽</span>
 
-          {currentItem?.quantity ? (
-            <div className={styles.quantityControls}>
+          {count > 0 ? (
+            <div className={styles.countControls}>
               <button
-                className={`${styles.button} ${styles.quantityButton}`}
-                onClick={() => onDeleteFromCart(product)}
+                className={styles.countButton}
+                onClick={handleRemoveFromCart}
               >
-                -
+                −
               </button>
-              <span className={styles.quantity}>{currentItem.quantity}</span>
-              <button
-                className={`${styles.button} ${styles.quantityButton}`}
-                onClick={() => onAddToCart(product)}
-              >
+              <span className={styles.count}>{count}</span>
+              <button className={styles.countButton} onClick={handleAddToCart}>
                 +
               </button>
             </div>
           ) : (
-            <button
-              className={`${styles.button} ${styles.primaryButton}`}
-              onClick={() => onAddToCart(product)}
-            >
+            <button className={styles.primaryButton} onClick={handleAddToCart}>
               Добавить
             </button>
           )}
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 

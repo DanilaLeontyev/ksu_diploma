@@ -1,10 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useGetAllProductsQuery } from '../../store/api/productApi';
-import ProductCard from '../ProductCardNew';
 import { addToCart, deleteFromCart } from '../../store/cartSlice';
-import styles from './productCardList.module.css';
+import ProductCard from '../ProductCard';
 import Loader from '../Loader';
+import styles from './productCardList.module.css';
 
 const ProductCardList: React.FC = () => {
   const { data, error, isLoading } = useGetAllProductsQuery(undefined);

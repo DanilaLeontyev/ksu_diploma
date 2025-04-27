@@ -1,0 +1,37 @@
+.container {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.title {
+  color: white;
+  margin-bottom: 16px;
+}
+
+.tableWrapper {
+  width: 100%;
+  overflow-x: auto;
+  background-color: transparent;
+  border-radius: 8px;
+}
+
+.table {
+  min-width: 600px;
+  background-color: transparent;
+}
+
+.orderButton {
+  margin-top: 16px;
+  background-color: #ffd700;
+  color: black;
+}
+
+.orderButton:hover {
+  background-color: #e6c200 !important;
+  color: black !important;
+}
+
+.orderButton:disabled {
+  background-color: #666;
+  color: #999;
+}

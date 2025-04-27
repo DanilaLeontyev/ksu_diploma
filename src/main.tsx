@@ -1,14 +1,13 @@
 import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import './index.css';
-import { store } from './store/store';
 import { Provider } from 'react-redux';
+import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router';
-// import Layout from "./pages/Layout.tsx";
+import Layout from './pages/Layout/index.tsx';
+import Order from './pages/Order/index.tsx';
+import Cart from './pages/Cart/Cart.tsx';
+import { store } from './store/store';
 import Menu from './pages/Menu.tsx';
-import Cart from './pages/Cart.tsx';
-import Order from './pages/Order.tsx';
-import Layout from './pages/LayoutNew';
+import './index.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
