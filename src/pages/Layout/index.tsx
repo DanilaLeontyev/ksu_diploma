@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { Link, Outlet } from 'react-router';
-import styles from './Layout.module.css';
+import styles from './layout.module.css';
 
 function Layout() {
   const cart = useSelector((state: RootState) => state.cart.cart);
