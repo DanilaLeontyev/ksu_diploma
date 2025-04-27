@@ -2,7 +2,7 @@
   width: 200px;
   margin: 16px;
   background-color: #232323;
-  border-radius: 0 0 8px 8px;
+  border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
   overflow: hidden;
