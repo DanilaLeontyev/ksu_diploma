@@ -7,7 +7,7 @@ import { addToCart, deleteFromCart, setCartId } from '../../store/cartSlice';
 import { useCreateOrderMutation } from '../../store/api/productApi';
 import { RootState } from '../../store/store';
 import { Product } from '../../types';
-import styles from './Cart.module.css';
+import styles from './cart.module.css';
 
 const { Title } = Typography;
 

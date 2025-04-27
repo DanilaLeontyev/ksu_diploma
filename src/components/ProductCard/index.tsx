@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Product } from '../../types';
 import { RootState } from '../../store/store';
-import styles from './ProductCard.module.css';
+import styles from './productCard.module.css';
 
 interface ProductCardProps {
   product: Product;
